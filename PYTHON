@@ -1,0 +1,52 @@
+# Function to display the bus seats
+def display_seats(seats):
+    print("Bus Seats:")
+    for i in range(len(seats)):
+        if i % 4 == 0 and i != 0:
+            print()  # New line after every 4 seats
+        print(f"[{seats[i]}]", end=" ")
+    print("\n")
+
+# Function to book a seat
+def book_seat(seats, seat_number):
+    if seat_number < 1 or seat_number > len(seats):
+        print("Invalid seat number.")
+    elif seats[seat_number - 1] == 'X':
+        print(f"Seat {seat_number} is already booked.")
+    else:
+        seats[seat_number - 1] = 'X'
+        print(f"Seat {seat_number} has been successfully booked.")
+
+# Function to display available seats
+def available_seats(seats):
+    available = [i+1 for i in range(len(seats)) if seats[i] == 'O']
+    if available:
+        print("Available seats:", available)
+    else:
+        print("No seats available.")
+
+# Main program
+def bus_booking():
+    seats = ['O' for _ in range(20)]  # O means the seat is available; 20 seats in the bus
+    while True:
+        print("\n1. Display Seats")
+        print("2. Book Seat")
+        print("3. Show Available Seats")
+        print("4. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            display_seats(seats)
+        elif choice == '2':
+            seat_number = int(input("Enter the seat number to book (1-20): "))
+            book_seat(seats, seat_number)
+        elif choice == '3':
+            available_seats(seats)
+        elif choice == '4':
+            print("Exiting the booking system.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+# Run the bus booking system
+bus_booking()
